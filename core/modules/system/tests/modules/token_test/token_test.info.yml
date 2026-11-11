@@ -1,0 +1,12 @@
+name: Token test
+type: module
+package: Testing
+# version: VERSION
+dependencies:
+  - drupal:user
+  - drupal:node
+
+# Information added by Drupal.org packaging script on 2026-11-06
+version: '11.4.12'
+project: 'drupal'
+datestamp: 1794003674

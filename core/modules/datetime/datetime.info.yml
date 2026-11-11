@@ -1,0 +1,12 @@
+name: Datetime
+type: module
+description: 'Defines field types for storing dates and times.'
+package: Field types
+# version: VERSION
+dependencies:
+  - drupal:field
+
+# Information added by Drupal.org packaging script on 2026-11-06
+version: '11.4.12'
+project: 'drupal'
+datestamp: 1794003675

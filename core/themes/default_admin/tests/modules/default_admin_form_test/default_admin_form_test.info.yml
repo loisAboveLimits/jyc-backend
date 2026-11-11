@@ -1,0 +1,10 @@
+name: 'Default Admin form test'
+type: module
+description: 'Provides form alters for testing the Default Admin theme.'
+package: Testing
+# version: VERSION
+
+# Information added by Drupal.org packaging script on 2026-11-06
+version: '11.4.12'
+project: 'drupal'
+datestamp: 1794003674

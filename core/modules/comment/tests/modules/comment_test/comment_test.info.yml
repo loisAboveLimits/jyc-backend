@@ -1,0 +1,12 @@
+name: 'Comment test'
+type: module
+description: 'Support module for Comment module testing.'
+package: Testing
+# version: VERSION
+dependencies:
+  - drupal:comment
+
+# Information added by Drupal.org packaging script on 2026-11-06
+version: '11.4.12'
+project: 'drupal'
+datestamp: 1794003675
