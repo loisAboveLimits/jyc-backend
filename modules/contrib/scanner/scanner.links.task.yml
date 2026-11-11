@@ -1,0 +1,22 @@
+scanner.admin_content:
+  title: 'Search and Replace Scanner'
+  route_name: scanner.admin_content
+  base_route: system.admin_content
+scanner.admin:
+  title: 'Scan and Replace'
+  route_name: scanner.admin_content
+  parent_id: scanner.admin_content
+scanner.admin_undo:
+  title: 'Undo'
+  route_name: scanner.undo
+  parent_id: scanner.admin_content
+  weight: 1
+scanner.admin_config_defaults:
+  title: 'Default options'
+  route_name: scanner.admin_config
+  base_route: scanner.admin_config
+scanner.admin_config_entity:
+  title: 'Entity types & fields'
+  route_name: scanner.admin_config_entity
+  base_route: scanner.admin_config
+  weight: 1

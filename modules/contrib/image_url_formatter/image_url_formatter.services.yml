@@ -1,0 +1,4 @@
+services:
+  image_url_formatter.hooks:
+    class: Drupal\image_url_formatter\Hook\ImageUrlFormatterHooks
+    autowire: true

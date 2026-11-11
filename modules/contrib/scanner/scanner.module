@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Primary hook implementations for the Scanner module.
+ */
+
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\scanner\Hook\ScannerQueryHooks;
+use Drupal\scanner\Hook\ScannerThemeHooks;
+
+/**
+ * Implements hook_theme().
+ */
+#[LegacyHook]
+function scanner_theme($existing, $type, $theme, $path): array {
+  return \Drupal::service(ScannerThemeHooks::class)->theme($existing, $type, $theme, $path);
+}
+
+/**
+ * Implements hook_query_TAG_alter() for 'scanner_search_regexp_like'.
+ */
+#[LegacyHook]
+function scanner_query_scanner_search_regexp_like_alter(AlterableInterface $query): void {
+  \Drupal::service(ScannerQueryHooks::class)->queryScannerSearchRegexpLikeAlter($query);
+}

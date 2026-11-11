@@ -1,0 +1,20 @@
+{
+  "name": "drupal/scanner",
+  "type": "drupal-module",
+  "description": "Perform search and replace on chosen text fields.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://drupal.org/project/scanner",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://drupal.org/project/issues/scanner",
+    "source": "https://git.drupalcode.org/project/scanner"
+  },
+  "require": {
+    "drupal/core": "^10.3 || ^11 || ^12"
+  },
+  "require-dev": {
+    "drupal/commerce": "^3",
+    "drupal/paragraphs": "^1"
+  }
+}

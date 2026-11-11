@@ -1,0 +1,3 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+.webform-tabs ul.webform-tabs-item-list{margin:0 0 1em 0;}.webform-tabs ul.webform-tabs-item-list li{margin:0 0.2em 0 0;}
+form .CodeMirror{height:auto;border:1px solid #ccc;font-size:13px;}form .CodeMirror-scroll{overflow-x:auto;overflow-y:hidden;}form .CodeMirror .CodeMirror-placeholder{color:#999;}pre.webform-codemirror-runmode{overflow:auto;margin:0;padding:0.5em 1em;border:1px solid #ccc;font-size:13px;}

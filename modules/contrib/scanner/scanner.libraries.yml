@@ -1,0 +1,6 @@
+select-all:
+  js:
+    js/select-all.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

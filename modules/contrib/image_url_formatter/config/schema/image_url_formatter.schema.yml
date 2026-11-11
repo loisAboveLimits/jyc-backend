@@ -1,0 +1,24 @@
+# Schema for configuration files of the Image URL Formatter module.
+field.formatter.settings.image_url_formatter:
+  type: mapping
+  label: 'Image field display format settings'
+  mapping:
+    url_type:
+      type: integer
+      label: 'URL type'
+    image_style:
+      type: string
+      label: 'Image style'
+    image_link:
+      type: string
+      label: 'Link image to'
+field.formatter.settings.file_url_formatter:
+  type: mapping
+  label: 'File field display format settings'
+  mapping:
+    url_type:
+      type: integer
+      label: 'URL type'
+    image_link:
+      type: string
+      label: 'Link image to'

@@ -1,0 +1,2 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+(function($,Drupal,once){Drupal.behaviors.webformHelpDialog={attach(context){$(once('webform-help-dialog','.button-webform-play',context)).on('click',function(event){if($(window).width()<768)event.stopImmediatePropagation();}).each(function(){var handlers=$._data(this,'events')['click'];var handler=handlers.pop();handlers.splice(0,0,handler);});}};})(jQuery,Drupal,once);;

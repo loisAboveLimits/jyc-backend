@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation for search and replace results.
+ *
+ * Available variables:
+ * - title: The heading for the results.
+ * - counts: The total number of 'entities' and 'matches'.
+ * - results: The results, keyed by entity type.
+ * - groups: A collapsible group of results for each entity type.
+ *
+ * @see \Drupal\scanner\AdminHelper::buildResults()
+ */
+#}
+<hr />
+<div class="scanner-results">
+  <h2>{{ title }}</h2>
+  <p>{{ 'Found @matches matches across @entities entities.'|t({ '@matches': counts.matches, '@entities': counts.entities }) }}</p>
+  {{ groups }}
+</div>
