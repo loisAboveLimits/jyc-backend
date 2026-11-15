@@ -1,0 +1,461 @@
+/*
+ * Make me dark
+ */
+
+.make-me-dark body {
+  background-color: #000;
+  color: #ccd;
+}
+
+.make-me-dark tr,
+.make-me-dark tr.update-recommended:hover,
+.make-me-dark tr.update-recommended,
+.make-me-dark tr.selected td,
+.make-me-dark tr.color-warning:hover, tr.color-warning:focus,
+.make-me-dark th {
+  color: #ccd;
+}
+
+.make-me-dark tr {
+  background-color: #161617;
+  border-bottom-color: #333;
+}
+
+.make-me-dark tr:hover,
+.make-me-dark tr:focus-within {
+  background-color: #222;
+  color: #ccd;
+}
+
+.make-me-dark tr.update-recommended:hover {
+  background-color: #333; /* #333 */
+}
+
+.make-me-dark tr.update-recommended,
+.make-me-dark tr.selected td {
+  background-color: #161617; /*#161617*/
+}
+
+.make-me-dark tr.color-warning:hover, tr.color-warning:focus {
+  background-color: #222622;
+}
+
+.make-me-dark th {
+  background-color: #222;
+}
+
+.make-me-dark a {
+  color: #09f;
+}
+
+.make-me-dark .link,
+.make-me-dark a:hover,
+.make-me-dark .link:hover {
+  color: #9cf;
+}
+
+.make-me-dark .sortable-heading.is-active > a {
+  color: #9cf;
+}
+
+.make-me-dark .sortable-heading.is-active > a::before {
+  border-bottom-color: #9cf;
+}
+
+.make-me-dark .tabs__link.is-active {
+  color: #9cf;
+}
+
+@media screen and (min-width: 48em) {
+  .make-me-dark .is-horizontal .tabs__link.is-active::before {
+    border-bottom-color: #9cf;
+  }
+}
+
+.tablesort {
+  opacity: 1;
+}
+
+.make-me-dark .content-header {
+  background-color: #161617;
+}
+
+.make-me-dark .content-header h1 {  }
+
+.make-me-dark .breadcrumb__link {
+  color: #aaa;
+}
+
+.make-me-dark .panel__title {
+  background-color: #161617;
+}
+
+.make-me-dark .views-exposed-form.views-exposed-form {
+  background-color: #161617;
+  border: none;
+}
+
+.make-me-dark fieldset {
+  color: inherit;
+}
+
+.make-me-dark .fieldset {
+  background-color: #222;
+}
+
+.make-me-dark .fieldset__legend {
+  color: #aaa;
+}
+
+.make-me-dark #edit-settings-allowed-formats--wrapper {
+  background-color: transparent;
+}
+
+.make-me-dark .form-boolean {
+  background-color: #222;
+}
+
+.make-me-dark .form-element {
+  background-color: #222;
+  color: #ccd;
+  border-color: #555;
+}
+
+.make-me-dark .form-element:focus {
+  box-shadow: 0 0 0 2px #555, 0 0 0 5px #3c3;
+}
+
+.make-me-dark a.button--primary {
+  color: #ccd;
+}
+
+.make-me-dark .dialog-cancel {
+  color: #555;
+}
+
+.make-me-dark .card {
+  border-color: #555;
+  background-color: #222;
+}
+
+.make-me-dark .entity-meta__header.accordion__item {
+  background-color: #222;
+  border-color: #555;
+  color: #ccd;
+}
+
+.make-me-dark .claro-details__summary.claro-details__summary--package-listing {
+  background-color: #222;
+  color: #ccd;
+}
+
+.make-me-dark [open] .claro-details__summary--accordion,
+.make-me-dark [open] .claro-details__summary--accordion-item,
+.make-me-dark [open] .claro-details__summary--vertical-tabs-item,
+.make-me-dark .claro-details[open] > .claro-details__summary:focus {
+  color: #ccd;
+}
+
+.make-me-dark .claro-details__wrapper--accordion,
+.make-me-dark .claro-details__wrapper--accordion-item,
+.make-me-dark .claro-details__wrapper--vertical-tabs-item {
+  background-color: #555;
+}
+
+.make-me-dark .claro-details__summary--accordion,
+.make-me-dark .claro-details__summary--accordion-item,
+.make-me-dark .claro-details__summary--vertical-tabs-item {
+  border-top: green;
+  background-color: #222;
+}
+
+.make-me-dark .claro-details__summary {
+  color: #aaa;
+}
+
+.make-me-dark .claro-details__summary:hover {
+  color: #ccd;
+  background-color: #111;
+}
+
+.make-me-dark .claro-details__summary--system-status-report {
+  background-color: #161617;
+}
+
+.make-me-dark .claro-details {
+  background-color: #161617;
+  border-color: #555;
+  color: #ccd;
+}
+
+.make-me-dark .system-status-report .claro-details {
+  border-block-end-color: #333;
+}
+
+.make-me-dark .views-bulk-actions {
+  border-color: #555;
+}
+
+.make-me-dark .dropbutton__item:first-of-type > * {
+  background-color: #333;
+  color: #ccd;
+}
+
+.make-me-dark .dropbutton__toggle {
+  border-inline-start: 1px solid #161617 !important;
+  background: #333;
+}
+
+.make-me-dark.no-touchevents .dropbutton--multiple.dropbutton--extrasmall {
+  background-color: #222;
+}
+
+.make-me-dark .dropbutton__item:first-of-type ~ .dropbutton__item > a,
+.dropbutton__item:first-of-type ~ .dropbutton__item > .button {
+  background-color: #333;
+  color: #ccd;
+}
+
+.make-me-dark .dropbutton__item:first-of-type ~ .dropbutton__item:hover > a {
+  background-color: #282828;
+}
+
+.make-me-dark .system-status-report__row {
+  border-bottom-color: #333;
+}
+
+.make-me-dark .form-item__description,
+.make-me-dark .claro-details__summary-summary {
+  color: inherit;
+}
+
+.make-me-dark .accordion__item .form-textarea-wrapper textarea {
+  background-color: #999;
+}
+
+.make-me-dark .system-cron-settings #edit-run,
+.make-me-dark .cron-description__run-cron .button--primary {
+  background-color: forestgreen;
+  color: #ccd;
+}
+
+.make-me-dark .system-cron-settings #edit-run:hover,
+.make-me-dark .cron-description__run-cron .button--primary:hover {
+  background-color: seagreen;
+}
+
+.make-me-dark .system-status-general-info__header {
+  border-block-start-color: #555;
+}
+
+.make-me-dark .module-list__module {
+  color: inherit;
+}
+
+/*
+ * UI dialog
+ */
+
+.make-me-dark .ui-dialog .ui-dialog-titlebar,
+.make-me-dark .ui-dialog > .ui-dialog-buttonpane {
+  background-color: #333;
+}
+
+.make-me-dark .ui-dialog > .ui-dialog-content {
+  color: #ccd;
+}
+
+/*
+ * Block admin
+ */
+
+.make-me-dark .region-title__action a {
+  color: #222;
+}
+
+.make-me-dark .ui-dialog > .ui-dialog-content {
+  background-color: #161617;
+}
+
+/*
+ * Cards
+ */
+
+.make-me-dark .card a {
+  color: #222
+}
+
+/*
+ * Details summary
+ */
+
+.make-me-dark .claro-details__summary:hover::before,
+.make-me-dark .claro-details__summary:hover:focus::before,
+.make-me-dark .claro-details[open] > .claro-details__summary:focus::before,
+.make-me-dark .claro-details[open] > .claro-details__summary--accordion::before,
+.make-me-dark .claro-details[open] > .claro-details__summary--accordion-item::before,
+.make-me-dark .claro-details[open] > .claro-details__summary--vertical-tabs-item::before {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3e%3cpath d='M5.21 1.314L3.79 2.723l5.302 5.353-5.303 5.354 1.422 1.408 6.697-6.762z' fill='%23ccccdd'/%3e%3c/svg%3e");
+}
+
+.make-me-dark .claro-details__content fieldset {
+  background-color: #555;
+}
+
+/*
+ * Vertical tabs
+ */
+
+.make-me-dark .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link {
+  color: #ccd;
+}
+
+.make-me-dark .vertical-tabs__menu-link-summary {
+  color: #ccd;
+}
+
+.make-me-dark .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link:hover {
+  color: #09f;
+}
+
+.make-me-dark .vertical-tabs__menu-item .vertical-tabs__menu-link {
+  /*background-color: #222;*/
+  color: #ccd;
+}
+
+.make-me-dark .vertical-tabs__items,
+.make-me-dark .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link {
+  border-color: #333;
+}
+
+.make-me-dark .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link:hover::before {
+  background-color: #222;
+  border: inherit;
+}
+
+.make-me-dark .vertical-tabs__menu-link:hover::before {
+  background-color: #555;
+}
+
+.make-me-dark .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link,
+.make-me-dark .vertical-tabs .vertical-tabs__panes,
+.make-me-dark .vertical-tabs .vertical-tabs__panes fieldset {
+  background-color: #161617;
+}
+
+.make-me-dark .vertical-tabs .vertical-tabs__panes fieldset {
+  border: none
+}
+
+.make-me-dark .vertical-tabs__menu-item::before,
+.make-me-dark .vertical-tabs__menu-item::after {
+  border-block-start-color: #222;
+}
+
+/*
+ * Admin links
+ */
+
+.make-me-dark .admin-item:not(:last-child) {
+  border-bottom: none;
+}
+
+.make-me-dark .panel {
+  border-block-end: calc(1ex / 8) solid #222;
+}
+
+/*
+ * Sortables
+ */
+
+.make-me-dark .sortable-heading > a::after {
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3e%3cpath d='M1.75.25v1.5h10.5V.25zm0 3v1.5h7.5v-1.5zm0 3v1.5h4.5v-1.5z' fill='%23ccccdd'/%3e%3c/svg%3e") no-repeat 50% 50%;
+}
+
+.make-me-dark .tablesort--asc {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='16' viewBox='0 0 10 12'%3e%3cpath d='M5 .44L.719 4.718 1.78 5.78 4.25 3.313v7.937h1.5V3.312l2.469 2.47L9.28 4.718 5 .439z' fill='%2399ccff'/%3e%3c/svg%3e");
+}
+
+.make-me-dark .tablesort--desc {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='16' viewBox='0 0 10 12'%3e%3cpath d='M4.25.75v7.938l-2.469-2.47L.72 7.282 5 11.561l4.281-4.28L8.22 6.22 5.75 8.687V.75h-1.5z' fill='%2399ccff'/%3e%3c/svg%3e");
+}
+
+/*
+ * Tabledrag
+ */
+
+.make-me-dark .tabledrag-handle.tabledrag-handle-y::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 8h12'/%3e%3cpath d='M8 2l2 2 -4 0 2 -2'/%3e%3cpath d='M8 14l2 -2 -4 0 2 2'/%3e%3c/svg%3e");
+}
+
+.make-me-dark .draggable.drag-previous,
+.make-me-dark .draggable.drag,
+.make-me-dark .draggable.drag:focus {
+  background-color: #335533;
+}
+
+/*
+ * CKEditor
+ */
+
+.make-me-dark .ck-editor__editable {
+  color: #111;
+}
+
+/*
+ * Views
+ */
+.make-me-dark #views-display-extra-actions {
+  background-color: #333;
+}
+
+.make-me-dark .views-displays {
+  border-top-color: #222;
+  border-right-color: #222;
+  border-left-color: #222;
+}
+
+.make-me-dark .views-ui-dialog .views-offset-top:not(:empty) {
+  background-color: #333;
+}
+
+.make-me-dark .views-display-top {
+  background-color: #161617;
+  border-bottom-color: #222;
+}
+
+.make-me-dark .views-tabs li a {
+  background-color: transparent;
+}
+
+.make-me-dark .views-tabs a {
+  border-color: #555;
+}
+
+.make-me-dark .views-tabs .add a {
+  color: #ccd;
+}
+
+.make-me-dark .views-display-column {
+  border-color: #333;
+}
+
+.make-me-dark .views-ui-display-tab-bucket.views-ui-display-tab-bucket {
+  border-bottom-color: #333;
+}
+
+.make-me-dark .views-edit-view .form-edit .form-actions, .form-edit .field-actions {
+  border-right-color: #333;
+  border-bottom-color: #333;
+  border-left-color: #333;
+  background-color: #161617;
+}
+
+.make-me-dark .view-preview-form__title {
+  border-bottom-color: #333;
+  background-color: #161617;
+}
+
+.make-me-dark .views-query-info table tr {
+  background-color: #222;
+}

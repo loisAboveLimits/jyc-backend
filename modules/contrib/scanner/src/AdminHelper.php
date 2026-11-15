@@ -2,7 +2,6 @@
 
 namespace Drupal\scanner;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\ContentEntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\RevisionLogInterface;
@@ -12,13 +11,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * Shared logic for use in the module.
  */
 class AdminHelper {
-
-  /**
-   * The number of entities above which the results are collapsed.
-   *
-   * @see ::buildResultsGroups()
-   */
-  const COLLAPSE_RESULTS_LIMIT = 20;
 
   /**
    * Show a message on the screen.
@@ -154,62 +146,12 @@ class AdminHelper {
    *   Renderable output.
    */
   public static function buildResults(array $results) {
-    $counts = self::buildResultsCounts($results);
     return [
       '#theme' => 'scanner_results',
       '#title' => t('Search results'),
-      '#counts' => $counts,
+      '#counts' => self::buildResultsCounts($results),
       '#results' => $results,
-      '#groups' => self::buildResultsGroups($results, $counts['entities'] > self::COLLAPSE_RESULTS_LIMIT),
     ];
-  }
-
-  /**
-   * Build a collapsible group of results for each entity type.
-   *
-   * @param array $results
-   *   The results structure from the search query.
-   * @param bool $collapsed
-   *   (optional) Whether the groups are closed. Closing them for large result
-   *   sets makes it easier to see which entity types were matched. Defaults
-   *   to FALSE.
-   *
-   * @return array
-   *   Renderable output, keyed by entity type.
-   */
-  public static function buildResultsGroups(array $results, bool $collapsed = FALSE): array {
-    $groups = [];
-    foreach ($results as $entity_type => $data) {
-      $counts = self::buildResultsCounts([$entity_type => $data]);
-
-      // Matches are excerpts of the field values, so they can contain tags
-      // that aren't closed. Close them, so that they don't affect the rest of
-      // the results.
-      foreach ($data['results'] as &$entity_data) {
-        foreach ($entity_data['fields'] as &$field_data) {
-          foreach ($field_data['results'] as &$result) {
-            $result = Html::normalize(strip_tags($result, '<strong>'));
-          }
-        }
-      }
-      unset($entity_data, $field_data, $result);
-
-      $groups[$entity_type] = [
-        '#type' => 'details',
-        '#title' => t('@label (@entities, @matches)', [
-          '@label' => $data['label'] ?? $entity_type,
-          '@entities' => \Drupal::translation()->formatPlural($counts['entities'], '1 entity', '@count entities'),
-          '@matches' => \Drupal::translation()->formatPlural($counts['matches'], '1 match', '@count matches'),
-        ]),
-        '#open' => !$collapsed,
-        'results' => [
-          '#theme' => 'scanner_results_group',
-          '#results' => $data['results'],
-        ],
-      ];
-    }
-    ksort($groups);
-    return $groups;
   }
 
   /**

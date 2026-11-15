@@ -426,7 +426,7 @@ abstract class Entity extends ScannerPluginBase {
         // does, then we'll use that to specify the case-sensitivity rather than
         // the BINARY flag.
         // https://mariadb.com/kb/en/pcre/#option-setting
-        $value = $word_boundaries_helper->getCaseSensitiveRegexPrefix() . $value;
+        $value = "(?-i)$value";
       }
       elseif ($operator === 'REGEXP' && $word_boundaries_helper->shouldUseRegexpLike()) {
         // Check if it supports the "REGEXP BINARY" syntax. If it does not, then

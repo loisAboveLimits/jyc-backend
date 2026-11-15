@@ -85,7 +85,6 @@ class NodeSearchTest extends ScannerTestBase {
 
     // Undo the replacement from the undo listing.
     $this->drupalGet('/admin/content/scanner/undo');
-    $this->assertSession()->elementTextEquals('xpath', '//table//tbody/tr/td[4]', '1');
     $this->getSession()->getPage()->clickLink('Undo');
     $this->submitForm([], 'Confirm');
     $session_assert->pageTextContains('Undone successful for ID: 1.');

@@ -1,0 +1,31 @@
+{
+    "name": "drupal/xclaro",
+    "description": "A Drupal 11 module that provides a dark option to Claro.",
+    "type": "drupal-module",
+    "homepage": "https://www.drupal.org/project/xclaro",
+    "keywords": [
+        "Claro",
+        "Dark"
+    ],
+    "authors": [
+        {
+            "name": "Jacques R. Blier (xmacinfo)",
+            "homepage": "https://www.drupal.org/u/xmacinfo",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/xclaro",
+        "source": "https://git.drupalcode.org/project/xclaro"
+    },
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/core": "^11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\xclaro\\": "src/"
+        }
+    }
+}

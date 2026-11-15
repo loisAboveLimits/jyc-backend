@@ -20,12 +20,6 @@ class ScannerThemeHooks {
           'title' => NULL,
           'counts' => [],
           'results' => [],
-          'groups' => [],
-        ],
-      ],
-      'scanner_results_group' => [
-        'variables' => [
-          'results' => [],
         ],
       ],
     ];
