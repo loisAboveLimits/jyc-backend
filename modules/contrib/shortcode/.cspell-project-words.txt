@@ -1,0 +1,5 @@
+# general list of terms.
+autowireable
+dropcap
+imagestyle
+renderplain

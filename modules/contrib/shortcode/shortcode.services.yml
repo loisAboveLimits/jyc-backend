@@ -1,0 +1,25 @@
+services:
+  plugin.manager.shortcode:
+    class: Drupal\shortcode\ShortcodePluginManager
+    parent: default_plugin_manager
+
+  shortcode:
+    class: Drupal\shortcode\ShortcodeService
+    arguments:
+      - '@plugin.manager.shortcode'
+
+  shortcode.media_url_resolver:
+    class: Drupal\shortcode\MediaUrlResolver
+    arguments:
+      - '@entity_type.manager'
+      - '@file_url_generator'
+
+  Drupal\shortcode\ShortcodeService: '@shortcode'
+
+  Drupal\shortcode\ShortcodePluginManager: '@plugin.manager.shortcode'
+
+  Drupal\shortcode\MediaUrlResolverInterface: '@shortcode.media_url_resolver'
+
+  Drupal\shortcode\Hook\ShortcodeHooks:
+    class: Drupal\shortcode\Hook\ShortcodeHooks
+    autowire: true

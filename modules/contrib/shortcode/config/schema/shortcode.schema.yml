@@ -1,0 +1,4 @@
+filter_settings.shortcode:
+  type: sequence
+  sequence:
+    type: boolean

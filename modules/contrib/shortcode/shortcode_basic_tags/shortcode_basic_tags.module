@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * @file
+ * Register hooks for ShortCodes that use Twig templates.
+ */

@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * @file
+ * Module provides ShortCodes filter framework and API (like WP ShortCodes)
+ */

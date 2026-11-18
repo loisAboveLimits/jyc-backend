@@ -1,0 +1,5 @@
+name: 'Stay on Edit'
+type: module
+description: 'Redirect to the node edit form after saving content.'
+package: Custom
+core_version_requirement: ^11

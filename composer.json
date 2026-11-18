@@ -24,6 +24,7 @@
         "drupal/core-vendor-hardening": "^11.4",
         "drupal/pathauto": "1.16",
         "drupal/scanner": "2.0",
+        "drupal/shortcode": "3.0",
         "drupal/webform": "6.3.1",
         "drupal/xclaro": "1.0.0-alpha1",
         "drush/drush": "13"

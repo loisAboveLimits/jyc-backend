@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Keeps users on the node edit page after saving.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function stay_on_edit_form_node_form_alter(
+  &$form,
+  FormStateInterface $form_state,
+  $form_id
+) {
+  // Apply to both new and existing nodes.
+  $form['actions']['submit']['#submit'][] =
+    'stay_on_edit_redirect';
+}
+
+/**
+ * Redirects to the edit page after saving.
+ */
+function stay_on_edit_redirect(
+  &$form,
+  FormStateInterface $form_state
+) {
+  $node = $form_state->getFormObject()->getEntity();
+
+  if ($node && !$node->isNew()) {
+    $form_state->setRedirectUrl(
+      Url::fromRoute('entity.node.edit_form', [
+        'node' => $node->id(),
+      ])
+    );
+  }
+}

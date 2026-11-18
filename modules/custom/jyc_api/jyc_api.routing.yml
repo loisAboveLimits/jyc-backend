@@ -1,0 +1,26 @@
+jyc_api.menu:
+  path: '/api/menu/{menu}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\MenuController::menu'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+    menu: '[a-z0-9_-]+'
+
+jyc_api.banners:
+  path: '/api/banners/{nid}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\BannersController::banners'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+    nid: '\d+'
+
+jyc_api.page:
+  path: '/api/page/{nid}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\PageController::page'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+    nid: '\d+'

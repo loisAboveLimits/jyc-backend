@@ -1,0 +1,10 @@
+name: 'JYC API'
+type: module
+description: 'JSON endpoints for the JYC Next.js frontend.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:system
+  - drupal:menu_link_content
+  - drupal:language
+  - drupal:path_alias

@@ -1,0 +1,5 @@
+
+services:
+  Drupal\shortcode_basic_tags\Hook\ShortcodeBasicTagsHooks:
+    class: Drupal\shortcode_basic_tags\Hook\ShortcodeBasicTagsHooks
+    autowire: true
