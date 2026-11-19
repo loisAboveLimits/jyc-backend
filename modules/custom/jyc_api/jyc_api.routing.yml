@@ -24,3 +24,49 @@ jyc_api.page:
   requirements:
     _permission: 'access content'
     nid: '\d+'
+
+jyc_api.block:
+  path: '/api/block/{id}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\BlockController::block'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+    id: '\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+
+jyc_api.section:
+  path: '/api/section/{nid}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\SectionController::section'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+    nid: '\d+'
+
+jyc_api.trips:
+  path: '/api/trips'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\TripsController::trips'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+
+jyc_api.events:
+  path: '/api/events'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\EventsController::events'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+
+jyc_api.webform_submit:
+  path: '/api/webform/{webform}'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\WebformSubmitController::submit'
+  methods: [POST]
+  requirements:
+    # The webform's own access settings are checked in the controller.
+    _permission: 'access content'
+    webform: '[a-z0-9_]+'
+  options:
+    no_cache: TRUE

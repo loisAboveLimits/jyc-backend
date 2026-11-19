@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Portal theme: document wrapper.
+ */
+#}
+<!DOCTYPE html>
+<html{{ html_attributes.addClass('portal-html') }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0b0d12">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+  </head>
+  <body{{ attributes }}>
+    {{ page_top }}
+    {{ page }}
+    {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>

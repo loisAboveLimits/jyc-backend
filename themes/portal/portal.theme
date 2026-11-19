@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * @file
+ * Portal theme: a single dark login page in front of the Drupal backend.
+ *
+ * Every front-end page renders one centred card:
+ *  - anonymous visitors see the logo and the core user login form, which
+ *    authenticates against this site's Drupal users;
+ *  - signed-in users see a short card linking to the dashboard and log out.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+use Drupal\user\Form\UserLoginForm;
+
+/**
+ * Routes whose own content is shown inside the card instead of the login form.
+ *
+ * The one-time login routes are kept so "drush uli" and admin-generated reset
+ * links keep working; the user edit form is where those links land.
+ */
+function _portal_passthrough_routes(bool $authenticated): array {
+  $routes = ['user.login', 'user.reset', 'user.reset.form', 'user.reset.login'];
+  if ($authenticated) {
+    $routes[] = 'entity.user.edit_form';
+  }
+  return $routes;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function portal_preprocess_html(array &$variables): void {
+  $variables['attributes']['class'][] = 'portal';
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function portal_preprocess_page(array &$variables): void {
+  $current_user = \Drupal::currentUser();
+  $authenticated = $current_user->isAuthenticated();
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'user.roles:authenticated';
+
+  // Logo from Appearance > Settings (falls back to the theme's logo.svg).
+  $variables['portal_logo'] = theme_get_setting('logo.url', 'portal');
+  $variables['portal_site_name'] = \Drupal::config('system.site')->get('name');
+  $variables['portal_wide'] = FALSE;
+
+  // Routes that keep their own content (login form, one-time login links).
+  if (in_array($route, _portal_passthrough_routes($authenticated), TRUE)) {
+    $variables['portal_body'] = $variables['page']['content'] ?? [];
+    $variables['portal_wide'] = $route === 'entity.user.edit_form';
+    return;
+  }
+
+  $messages = ['#type' => 'status_messages'];
+
+  if (!$authenticated) {
+    // Show the login form on every other front-end page. It posts to
+    // /user/login so the submission is handled by core's own login route.
+    $form = \Drupal::formBuilder()->getForm(UserLoginForm::class);
+    $form['#action'] = Url::fromRoute('user.login')->toString();
+    $variables['portal_body'] = ['messages' => $messages, 'form' => $form];
+    return;
+  }
+
+  // Signed-in user on a front-end page.
+  $links = [];
+  if ($current_user->hasPermission('access administration pages')) {
+    $links['dashboard'] = [
+      '#type' => 'link',
+      '#title' => t('Go to dashboard'),
+      '#url' => Url::fromRoute('system.admin'),
+      '#attributes' => ['class' => ['portal-button']],
+    ];
+  }
+  $links['logout'] = [
+    '#type' => 'link',
+    '#title' => t('Log out'),
+    '#url' => Url::fromRoute('user.logout'),
+    '#attributes' => ['class' => ['portal-button', 'portal-button--ghost']],
+  ];
+
+  $variables['portal_body'] = [
+    'messages' => $messages,
+    'greeting' => [
+      '#markup' => '<p class="portal-greeting">' . t('Signed in as %name', ['%name' => $current_user->getDisplayName()]) . '</p>',
+    ],
+    'links' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['portal-actions']],
+    ] + $links,
+  ];
+  $variables['#cache']['contexts'][] = 'user';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_login_form.
+ */
+function portal_form_user_login_form_alter(array &$form, FormStateInterface $form_state): void {
+  $form['#attributes']['class'][] = 'portal-form';
+
+  $form['name']['#description'] = NULL;
+  $form['name']['#attributes']['placeholder'] = t('Username');
+  $form['name']['#attributes']['autocomplete'] = 'username';
+  $form['name']['#attributes']['autocapitalize'] = 'none';
+  $form['name']['#attributes']['spellcheck'] = 'false';
+
+  $form['pass']['#description'] = NULL;
+  $form['pass']['#attributes']['placeholder'] = t('Password');
+  $form['pass']['#attributes']['autocomplete'] = 'current-password';
+
+  $form['actions']['submit']['#value'] = t('Log in');
+  $form['actions']['submit']['#attributes']['class'][] = 'portal-button';
+
+  // Strip "Forgot your password?" / "request a new password" links from
+  // login error messages.
+  $form['#validate'][] = 'portal_user_login_clean_errors';
+  // Send users to the dashboard after login (unless ?destination= is set).
+  $form['#submit'][] = 'portal_user_login_redirect';
+}
+
+/**
+ * Validation callback: removes password-reset links from login errors.
+ */
+function portal_user_login_clean_errors(array &$form, FormStateInterface $form_state): void {
+  $errors = $form_state->getErrors();
+  if (!$errors) {
+    return;
+  }
+  $form_state->clearErrors();
+  foreach ($errors as $name => $error) {
+    $text = preg_replace('#<a\b[^>]*>.*?</a>#is', '', (string) $error);
+    $text = preg_replace('/\s+or\s*\.?\s*$/i', '.', trim($text));
+    $form_state->setErrorByName($name, Markup::create(trim($text)));
+  }
+}
+
+/**
+ * Submit callback: redirects to the admin dashboard after login.
+ */
+function portal_user_login_redirect(array &$form, FormStateInterface $form_state): void {
+  if (\Drupal::request()->query->has('destination')) {
+    return;
+  }
+  $account = \Drupal::currentUser();
+  $form_state->setRedirect($account->hasPermission('access administration pages') ? 'system.admin' : '<front>');
+}

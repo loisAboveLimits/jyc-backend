@@ -1,0 +1,270 @@
+/**
+ * Portal theme — dark, centred login.
+ */
+:root {
+  --portal-bg: #0b0d12;
+  --portal-surface: #151922;
+  --portal-border: #262c38;
+  --portal-input: #0f1218;
+  --portal-text: #e6e9ef;
+  --portal-muted: #8a93a6;
+  --portal-accent: #3b82f6;
+  --portal-accent-hover: #2563eb;
+  --portal-error: #f87171;
+  --portal-success: #4ade80;
+  --portal-radius: 10px;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--portal-bg);
+  background-image: radial-gradient(ellipse at top, #161b26 0%, var(--portal-bg) 60%);
+  color: var(--portal-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout: centred horizontally and vertically. */
+.portal-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+}
+
+.portal-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--portal-surface);
+  border: 1px solid var(--portal-border);
+  border-radius: 14px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.portal-card--wide {
+  max-width: 720px;
+}
+
+.portal-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.portal-logo img {
+  display: block;
+  max-width: 180px;
+  max-height: 90px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.portal-credit {
+  margin: 0;
+  color: var(--portal-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Form. */
+.portal-body .form-item {
+  margin: 0 0 1rem;
+}
+
+.portal-body label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--portal-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.portal-body .form-required::after {
+  content: "";
+}
+
+.portal-body input[type="text"],
+.portal-body input[type="password"],
+.portal-body input[type="email"] {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  background: var(--portal-input);
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+  color: var(--portal-text);
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portal-body input::placeholder {
+  color: #5b6477;
+}
+
+.portal-body input:focus {
+  outline: none;
+  border-color: var(--portal-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.portal-body input.error {
+  border-color: var(--portal-error);
+}
+
+.portal-body .description {
+  margin-top: 0.3rem;
+  color: var(--portal-muted);
+  font-size: 0.8rem;
+}
+
+.portal-body .form-actions {
+  margin: 1.5rem 0 0;
+}
+
+/* Buttons. */
+.portal-button,
+.portal-body input[type="submit"],
+.portal-body button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--portal-accent);
+  border: 1px solid transparent;
+  border-radius: var(--portal-radius);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.portal-button:hover,
+.portal-body input[type="submit"]:hover,
+.portal-body button:hover {
+  background: var(--portal-accent-hover);
+}
+
+.portal-button:focus-visible,
+.portal-body input[type="submit"]:focus-visible {
+  outline: 2px solid var(--portal-accent);
+  outline-offset: 2px;
+}
+
+.portal-button--ghost {
+  background: transparent;
+  border-color: var(--portal-border);
+  color: var(--portal-text);
+}
+
+.portal-button--ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Signed-in card. */
+.portal-greeting {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  color: var(--portal-muted);
+}
+
+.portal-greeting em {
+  color: var(--portal-text);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.portal-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Status messages. */
+.portal-body [data-drupal-messages] > div,
+.portal-body .messages {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--portal-border);
+  border-left-width: 3px;
+  border-radius: var(--portal-radius);
+  background: var(--portal-input);
+  font-size: 0.875rem;
+}
+
+.portal-body .messages--error {
+  border-left-color: var(--portal-error);
+  color: #fecaca;
+}
+
+.portal-body .messages--status {
+  border-left-color: var(--portal-success);
+}
+
+.portal-body .messages--warning {
+  border-left-color: #facc15;
+}
+
+.portal-body .messages h2,
+.portal-body .visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.portal-body .messages ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.portal-body a {
+  color: var(--portal-accent);
+}
+
+.portal-body a.portal-button {
+  color: #fff;
+}
+
+.portal-body a.portal-button--ghost {
+  color: var(--portal-text);
+}
+
+@media (max-width: 420px) {
+  .portal-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .portal-logo img {
+    max-width: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

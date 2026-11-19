@@ -1,0 +1,17 @@
+name: Portal
+type: theme
+description: 'Minimal dark, single-page login portal for accessing the Drupal backend. Logo is configurable under Appearance > Settings.'
+package: Custom
+core_version_requirement: ^11 || ^12
+base theme: false
+version: 1.0.0
+
+libraries:
+  - portal/global
+
+regions:
+  content: Content
+
+features:
+  - logo
+  - favicon

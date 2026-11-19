@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Portal theme: the single page — logo above a centred card.
+ *
+ * Variables (see portal_preprocess_page()):
+ * - portal_logo: URL of the logo set in Appearance > Settings.
+ * - portal_site_name: site name, used as the logo's alt text.
+ * - portal_body: render array for the card (login form or signed-in card).
+ * - portal_wide: TRUE when the card holds a larger form.
+ */
+#}
+<main class="portal-shell" role="main">
+  <div class="portal-card{{ portal_wide ? ' portal-card--wide' }}">
+    {% if portal_logo %}
+      <div class="portal-logo">
+        <img src="{{ portal_logo }}" alt="{{ portal_site_name }}">
+      </div>
+    {% endif %}
+    <div class="portal-body">
+      {{ portal_body }}
+    </div>
+  </div>
+  <p class="portal-credit">Design and Powered by Drupal and Above Limits</p>
+</main>
