@@ -61,6 +61,20 @@ class WordBoundariesHelper {
   }
 
   /**
+   * Returns the correct inline regex prefix for case-sensitive matching.
+   *
+   * PostgreSQL uses Advanced Regular Expressions (ARE), where (?c) enables
+   * case-sensitive matching. The other supported inline-regex engines use the
+   * PCRE/ICU-compatible (?-i) form.
+   *
+   * @return string
+   *   The database-specific inline case-sensitive regex prefix.
+   */
+  public function getCaseSensitiveRegexPrefix(): string {
+    return $this->database->databaseType() === 'pgsql' ? '(?c)' : '(?-i)';
+  }
+
+  /**
    * Returns whether the REGEXP_LIKE function should be used.
    *
    * This is useful when doing case-sensitive regexp matches on MySQL 8.

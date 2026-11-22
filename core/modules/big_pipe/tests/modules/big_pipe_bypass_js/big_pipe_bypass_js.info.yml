@@ -2,9 +2,4 @@ name: 'BigPipe bypass JS'
 type: module
 description: 'Prevents the loading of Big Pipe JavaScript. Used for testing preview templates.'
 package: Testing
-# version: VERSION
-
-# Information added by Drupal.org packaging script on 2026-11-06
-version: '11.4.12'
-project: 'drupal'
-datestamp: 1794003675
+version: VERSION

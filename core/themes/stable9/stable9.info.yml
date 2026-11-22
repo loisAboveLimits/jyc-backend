@@ -2,7 +2,7 @@ name: Stable 9
 type: theme
 description: A base theme using Drupal 9.0.0's core markup and CSS.
 package: Core
-# version: VERSION
+version: VERSION
 base theme: false
 hidden: true
 lifecycle: deprecated
@@ -333,8 +333,3 @@ libraries-override:
     css:
       theme:
         css/field_ui_display_overview_table.css: css/field_ui/field_ui_display_overview_table.css
-
-# Information added by Drupal.org packaging script on 2026-11-06
-version: '11.4.12'
-project: 'drupal'
-datestamp: 1794003674

@@ -1,31 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation for search and replace results.
+ *
+ * Available variables:
+ * - title: The heading for the results.
+ * - counts: The total number of 'entities' and 'matches'.
+ * - results: The results, keyed by entity type.
+ * - groups: A collapsible group of results for each entity type.
+ *
+ * @see \Drupal\scanner\AdminHelper::buildResults()
+ */
+#}
 <hr />
 <div class="scanner-results">
   <h2>{{ title }}</h2>
   <p>{{ 'Found @matches matches across @entities entities.'|t({ '@matches': counts.matches, '@entities': counts.entities }) }}</p>
-  {% for entity_type, data in results %}
-    <h3>{{ data.label }}</h3>
-    <ul>
-      {% for id, entity in data.results %}
-        <li>
-          {{ entity.title }}
-          {% if entity.bundle %}({{ entity.bundle }}){% endif %}
-          {% if entity.url %}
-            | <a href="{{ entity.url }}">{{ 'view'|t }}</a>
-          {% endif %}
-          {% if entity.edit_url %}
-            | <a href="{{ entity.edit_url }}">{{ 'edit'|t }}</a>
-          {% endif %}
-          {% if entity.fields %}
-            <ul>
-              {% for field, data in entity.fields %}
-                {% for result in data.results %}
-                  <li>{{ data.label }}: {{ result|striptags('<strong>')|raw }}</li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endfor %}
+  {{ groups }}
 </div>

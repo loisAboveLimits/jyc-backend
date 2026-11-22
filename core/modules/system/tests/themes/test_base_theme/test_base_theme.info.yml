@@ -1,7 +1,7 @@
 name: 'Theme test base theme'
 type: theme
 description: 'Test theme which acts as a base theme for other test subthemes.'
-# version: VERSION
+version: VERSION
 base theme: false
 hidden: true
 
@@ -20,8 +20,3 @@ libraries-override:
     css:
       base:
         css/base-remove.css: false
-
-# Information added by Drupal.org packaging script on 2026-11-06
-version: '11.4.12'
-project: 'drupal'
-datestamp: 1794003674

@@ -1,0 +1,6 @@
+jyc_api.blog_import:
+  title: 'Import content'
+  description: 'Create blog posts, FAQs or team members (with images) from a tar.gz / tgz / tar.bz2 archive.'
+  route_name: jyc_api.blog_import
+  parent: system.admin_content
+  weight: 20

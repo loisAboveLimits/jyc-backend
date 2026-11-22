@@ -71,14 +71,17 @@ class ScannerForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $config = $this->configFactory()->get('scanner.admin_settings');
     $fields = $config->get('fields_of_selected_content_type');
-    $config_page = Url::fromRoute('scanner.admin_config')->toString();
+    // Only link to the settings for users who can change them.
+    $config_url = Url::fromRoute('scanner.admin_config');
+    $can_configure = $config_url->access();
+    $config_page = $config_url->toString();
 
     if (empty($fields)) {
       $form['settings_link'] = [
         '#prefix' => '<p>',
-        '#markup' => $this->t('The search fields were not configured. To configure them go to <a href="@href">Search and Replace Scanner configuration</a>', [
+        '#markup' => $can_configure ? $this->t('The search fields were not configured. To configure them go to <a href="@href">Search and Replace Scanner configuration</a>', [
           '@href' => $config_page,
-        ]),
+        ]) : $this->t('The search fields were not configured.'),
         '#suffix' => '</p>',
       ];
 
@@ -97,6 +100,7 @@ class ScannerForm extends FormBase {
         '@href' => $config_page,
       ]),
       '#suffix' => '</p>',
+      '#access' => $can_configure,
     ];
     $form['search'] = [
       '#type' => 'textfield',

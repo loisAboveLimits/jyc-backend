@@ -8,3 +8,6 @@ dependencies:
   - drupal:menu_link_content
   - drupal:language
   - drupal:path_alias
+  - drupal:node
+  - drupal:file
+  - drupal:media

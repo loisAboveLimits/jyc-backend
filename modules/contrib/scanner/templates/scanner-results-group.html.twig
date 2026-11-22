@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the search and replace results of one
+ * entity type.
+ *
+ * Available variables:
+ * - results: The matched entities, keyed by entity ID. Each has a title,
+ *   bundle, url, edit_url, and the matches in each field.
+ *
+ * @see \Drupal\scanner\AdminHelper::buildResultsGroups()
+ */
+#}
+<ul>
+  {% for id, entity in results %}
+    <li>
+      {{ entity.title }}
+      {% if entity.bundle %}({{ entity.bundle }}){% endif %}
+      {% if entity.url %}
+        | <a href="{{ entity.url }}">{{ 'view'|t }}</a>
+      {% endif %}
+      {% if entity.edit_url %}
+        | <a href="{{ entity.edit_url }}">{{ 'edit'|t }}</a>
+      {% endif %}
+      {% if entity.fields %}
+        <ul>
+          {% for field, data in entity.fields %}
+            {% for result in data.results %}
+              <li>{{ data.label }}: {{ result|striptags('<strong>')|raw }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

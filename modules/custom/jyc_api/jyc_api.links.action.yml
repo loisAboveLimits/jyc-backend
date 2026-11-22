@@ -1,0 +1,6 @@
+jyc_api.blog_import_action:
+  route_name: jyc_api.blog_import
+  title: 'Import content'
+  appears_on:
+    - system.admin_content
+  weight: 20

@@ -85,6 +85,7 @@ class NodeSearchTest extends ScannerTestBase {
 
     // Undo the replacement from the undo listing.
     $this->drupalGet('/admin/content/scanner/undo');
+    $this->assertSession()->elementTextEquals('xpath', '//table//tbody/tr/td[4]', '1');
     $this->getSession()->getPage()->clickLink('Undo');
     $this->submitForm([], 'Confirm');
     $session_assert->pageTextContains('Undone successful for ID: 1.');
@@ -305,10 +306,11 @@ class NodeSearchTest extends ScannerTestBase {
     $search = '/egg/custard';
     $replace = '/egg-custard';
 
-    // Look for the search string with the preceding slash. Doing this search
-    // with the 'wholeword' option enabled (default) won't find any results.
+    // Look for the search string with the preceding slash, with the
+    // 'wholeword' option enabled (default). The string starts with a non-word
+    // character so no leading word boundary is required and it is found.
     $this->executeSearch($search);
-    $this->assertSession()->pageTextContains('Found 0 matches in 0 entities.');
+    $this->assertSession()->pageTextContains('Found 1 matches in 1 entities.');
 
     // Perform the same search with the wholeword option disabled, which will
     // find the page.
@@ -324,6 +326,49 @@ class NodeSearchTest extends ScannerTestBase {
 
     // Verify the replacement string can now be found.
     $this->executeSearch($replace, ['wholeword' => FALSE]);
+    $this->assertSession()->pageTextContains('Found 1 matches in 1 entities.');
+  }
+
+  /**
+   * Tests a 'wholeword' search for a URL that ends with a slash.
+   *
+   * @throws \Behat\Mink\Exception\ResponseTextException
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  public function testSearchReplaceUrlTrailingSlash(): void {
+    $default_format = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.4.0', fn() => \Drupal::service(FilterFormatRepositoryInterface::class)->getDefaultFormat()->id(), fn() => filter_default_format());
+    $this->createNode([
+      'type' => 'scanner_test_node_type',
+      'title' => 'Trailing slash test',
+      'body' => [
+        [
+          'value' => '<p>Visit <a href="https://example.com/some/page/">the page</a>.</p>',
+          'format' => $default_format,
+        ],
+      ],
+    ]);
+
+    $search = 'https://example.com/some/page/';
+    $replace = 'https://example.com/new/page/';
+
+    // The search string ends with a non-word character, so it must be found
+    // with the 'wholeword' option enabled (default).
+    $this->executeSearch($search);
+    $this->assertSession()->pageTextContains('Found 1 matches in 1 entities.');
+
+    // The same URL without the trailing slash is also found.
+    $this->executeSearch(rtrim($search, '/'));
+    $this->assertSession()->pageTextContains('Found 1 matches in 1 entities.');
+
+    // A whole word search must still not match inside a longer word.
+    $this->executeSearch('https://example.com/some/pag');
+    $this->assertSession()->pageTextContains('Found 0 matches in 0 entities.');
+
+    // Replace the URL with the 'wholeword' option enabled.
+    $this->executeReplacement($search, $replace);
+    $this->executeSearch($search);
+    $this->assertSession()->pageTextContains('Found 0 matches in 0 entities.');
+    $this->executeSearch($replace);
     $this->assertSession()->pageTextContains('Found 1 matches in 1 entities.');
   }
 
