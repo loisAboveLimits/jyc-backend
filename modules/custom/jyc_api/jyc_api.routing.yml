@@ -115,3 +115,19 @@ jyc_api.gallery:
   requirements:
     _permission: 'access content'
     nid: '\d+'
+
+jyc_api.testimonies:
+  path: '/api/testimonies'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\TestimoniesController::testimonies'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'
+
+jyc_api.courses:
+  path: '/api/courses'
+  defaults:
+    _controller: '\Drupal\jyc_api\Controller\CoursesController::courses'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'

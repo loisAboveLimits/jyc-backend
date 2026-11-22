@@ -8,9 +8,11 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\jyc_api\BlogImporter;
+use Drupal\jyc_api\CourseImporter;
 use Drupal\jyc_api\FaqImporter;
 use Drupal\jyc_api\ImportArchive;
 use Drupal\jyc_api\TeamImporter;
+use Drupal\jyc_api\TestimonyImporter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -18,7 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * imports depends on the file inside:
  *   - posts.json (+ images/): Blogs posts, see BlogImporter;
  *   - faqs.json: FAQ items, see FaqImporter;
- *   - teams.json (+ images/): Teams members, see TeamImporter.
+ *   - teams.json (+ images/): Teams members, see TeamImporter;
+ *   - testimonies.json: Testimonies, see TestimonyImporter;
+ *   - courses.json (+ images/): Courses, see CourseImporter.
  */
 final class BlogImportForm extends FormBase {
 
@@ -29,16 +33,26 @@ final class BlogImportForm extends FormBase {
     'posts.json' => ['blogs', 'Blog posts'],
     'faqs.json' => ['faq', 'FAQs'],
     'teams.json' => ['teams', 'Team members'],
+    'testimonies.json' => ['testimonies', 'Testimonies'],
+    'courses.json' => ['courses', 'Courses'],
   ];
 
   public function __construct(
     private readonly BlogImporter $blogImporter,
     private readonly FaqImporter $faqImporter,
     private readonly TeamImporter $teamImporter,
+    private readonly TestimonyImporter $testimonyImporter,
+    private readonly CourseImporter $courseImporter,
   ) {}
 
   public static function create(ContainerInterface $container): static {
-    return new static(BlogImporter::create($container), FaqImporter::create($container), TeamImporter::create($container));
+    return new static(
+      BlogImporter::create($container),
+      FaqImporter::create($container),
+      TeamImporter::create($container),
+      TestimonyImporter::create($container),
+      CourseImporter::create($container),
+    );
   }
 
   public function getFormId(): string {
@@ -58,6 +72,8 @@ final class BlogImportForm extends FormBase {
         $this->t('<code>posts.json</code> and an <code>images</code> folder: <strong>Blogs</strong> posts. A post whose URL (<code>/blogs/…</code>) already exists is updated.'),
         $this->t('<code>faqs.json</code>: <strong>FAQ</strong> items with their category and order. An FAQ with the same category and question is updated.'),
         $this->t('<code>teams.json</code> and an <code>images</code> folder: <strong>Teams</strong> members with their position and photo. A member with the same name is updated.'),
+        $this->t('<code>testimonies.json</code>: <strong>Testimonies</strong> (name, headline, review and rating). An item with the same name and headline is updated.'),
+        $this->t('<code>courses.json</code> and an <code>images</code> folder: <strong>Courses</strong> with their photo and booking link. A course with the same title is updated.'),
       ],
     ];
     $form['archive'] = [
@@ -101,12 +117,14 @@ final class BlogImportForm extends FormBase {
       $archive = ImportArchive::open($path);
       $found = $archive->manifest(...array_keys(self::KINDS));
       if ($found === NULL) {
-        throw new \RuntimeException('The archive contains no posts.json, faqs.json or teams.json file.');
+        throw new \RuntimeException('The archive contains no posts.json, faqs.json, teams.json, testimonies.json or courses.json file.');
       }
       [$manifestName, $manifest] = $found;
       $result = match ($manifestName) {
         'faqs.json' => $this->faqImporter->importFrom($archive, $manifest),
         'teams.json' => $this->teamImporter->importFrom($archive, $manifest),
+        'testimonies.json' => $this->testimonyImporter->importFrom($archive, $manifest),
+        'courses.json' => $this->courseImporter->importFrom($archive, $manifest),
         default => $this->blogImporter->importFrom($archive, $manifest),
       };
     }
