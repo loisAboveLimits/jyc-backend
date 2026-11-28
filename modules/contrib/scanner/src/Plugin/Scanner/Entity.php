@@ -367,10 +367,6 @@ abstract class Entity extends ScannerPluginBase {
    *     'REGEXP', 'LIKE', 'REGEXP_LIKE'.
    */
   protected function buildCondition(string $search, bool $mode, bool $wholeword, bool $regex, string $preceded, string $followed): array {
-    // The full unescaped text that must match, used for word boundary checks.
-    $leading_text = $preceded . $search;
-    $trailing_text = $search . $followed;
-
     $preceded_php = '';
     if (!empty($preceded)) {
       if (!$regex) {
@@ -407,15 +403,9 @@ abstract class Entity extends ScannerPluginBase {
     }
     // Case 2.
     elseif ($wholeword && !$regex) {
-      // A word boundary only matches next to a word character, so only add it
-      // on a side where the text starts or ends with one.
-      $prefix = $this->startsWithWordCharacter($leading_text) ? $word_boundary_prefix : '';
-      $suffix = $this->endsWithWordCharacter($trailing_text) ? $word_boundary_suffix : '';
-      $value = $prefix . $preceded . addcslashes($search, $this->scannerRegexChars) . $followed . $suffix;
+      $value = $word_boundary_prefix . $preceded . addcslashes($search, $this->scannerRegexChars) . $followed . $word_boundary_suffix;
       $operator = 'REGEXP';
-      $php_prefix = $this->startsWithWordCharacter($search) ? '\b' : '';
-      $php_suffix = $this->endsWithWordCharacter($search) ? '\b' : '';
-      $phpRegex = '/' . $php_prefix . $preceded_php . addcslashes($search, $this->scannerRegexChars) . $followed_php . $php_suffix . '/';
+      $phpRegex = '/\b' . $preceded_php . addcslashes($search, $this->scannerRegexChars) . $followed . '\b/';
     }
     // Case 3.
     elseif (!$wholeword && $regex) {
@@ -427,7 +417,7 @@ abstract class Entity extends ScannerPluginBase {
     else {
       $value = '%' . $preceded . addcslashes($search, $this->scannerRegexChars) . $followed . '%';
       $operator = 'LIKE';
-      $phpRegex = '/' . $preceded_php . addcslashes($search, $this->scannerRegexChars) . $followed_php . '/';
+      $phpRegex = '/' . $preceded . addcslashes($search, $this->scannerRegexChars) . $followed . '/';
     }
 
     if ($mode) {
@@ -436,7 +426,7 @@ abstract class Entity extends ScannerPluginBase {
         // does, then we'll use that to specify the case-sensitivity rather than
         // the BINARY flag.
         // https://mariadb.com/kb/en/pcre/#option-setting
-        $value = $word_boundaries_helper->getCaseSensitiveRegexPrefix() . $value;
+        $value = "(?-i)$value";
       }
       elseif ($operator === 'REGEXP' && $word_boundaries_helper->shouldUseRegexpLike()) {
         // Check if it supports the "REGEXP BINARY" syntax. If it does not, then
@@ -456,32 +446,6 @@ abstract class Entity extends ScannerPluginBase {
       'phpRegex' => $phpRegex,
       'operator' => $operator,
     ];
-  }
-
-  /**
-   * Checks whether a string starts with a word character.
-   *
-   * @param string $text
-   *   The string to check.
-   *
-   * @return bool
-   *   TRUE if the first character is a letter, digit or underscore.
-   */
-  protected function startsWithWordCharacter(string $text): bool {
-    return (bool) preg_match('/^\w/', $text);
-  }
-
-  /**
-   * Checks whether a string ends with a word character.
-   *
-   * @param string $text
-   *   The string to check.
-   *
-   * @return bool
-   *   TRUE if the last character is a letter, digit or underscore.
-   */
-  protected function endsWithWordCharacter(string $text): bool {
-    return (bool) preg_match('/\w\z/', $text);
   }
 
   /**

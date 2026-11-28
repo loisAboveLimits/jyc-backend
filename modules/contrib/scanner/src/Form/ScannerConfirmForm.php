@@ -158,6 +158,7 @@ class ScannerConfirmForm extends ConfirmFormBase {
    *   A list of operations that were processed.
    */
   public static function batchFinished(bool $success, array $results, array $operations): void {
+    $count = 0;
     $messenger = \Drupal::messenger();
     if ($success) {
       if (!empty($results['data'])) {
@@ -174,7 +175,7 @@ class ScannerConfirmForm extends ConfirmFormBase {
             'undone' => 0,
             'searched' => $results['inputs']['search'],
             'replaced' => $results['inputs']['replace'],
-            'count' => $results['count'],
+            'count' => $count,
             'time' => \Drupal::time()->getRequestTime(),
           ])
           ->execute();

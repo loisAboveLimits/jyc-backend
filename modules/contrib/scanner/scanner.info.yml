@@ -4,7 +4,7 @@ description: Perform search and replace on chosen text fields.
 core_version_requirement: '^10.3 || ^11 || ^12'
 configure: scanner.admin_config
 
-# Information added by Drupal.org packaging script on 2026-11-11
-version: '2.0.2'
+# Information added by Drupal.org packaging script on 2026-08-05
+version: '2.0.0'
 project: 'scanner'
-datestamp: 1794399440
+datestamp: 1785942298

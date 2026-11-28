@@ -17,10 +17,10 @@
     ],
     "require": {
         "composer/installers": "^2.3",
-        "drupal/core-composer-scaffold": "11.4.13",
-        "drupal/core-project-message": "11.4.13",
+        "drupal/core-composer-scaffold": "11.4.14",
+        "drupal/core-project-message": "11.4.14",
         "drupal/core-recipe-unpack": "^11.4",
-        "drupal/core-recommended": "11.4.13",
+        "drupal/core-recommended": "11.4.14",
         "drupal/core-vendor-hardening": "^11.4",
         "drupal/pathauto": "1.16",
         "drupal/scanner": "2.0",
